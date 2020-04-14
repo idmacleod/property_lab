@@ -57,4 +57,24 @@ class Property
         db.close()
     end
 
+    def self.find(id)
+        db = PG.connect({dbname: 'property_tracker', host: 'localhost'})
+        sql = "SELECT * FROM properties WHERE id = $1;"
+        values = [id]
+        db.prepare("find", sql)
+        properties = db.exec_prepared("find", values)
+        db.close()
+        return properties.map {|property_hash| self.new(property_hash)}[0]
+    end
+
+    def self.find_address(address)
+        db = PG.connect({dbname: 'property_tracker', host: 'localhost'})
+        sql = "SELECT * FROM properties WHERE address = $1;"
+        values = [address]
+        db.prepare("find_address", sql)
+        properties = db.exec_prepared("find_address", values)
+        db.close()
+        return properties.map {|property_hash| self.new(property_hash)}[0]
+    end
+
 end

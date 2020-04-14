@@ -19,17 +19,21 @@ puts "Test all():"
 p Property.all()
 puts
 
+puts "Test update():"
 prop2.value = 30
 prop2.update()
-
-puts "Test update():"
 p Property.all()
 puts
 
-prop1.delete()
-
 puts "Test delete():"
+prop1.delete()
 p Property.all()
+puts
+
+puts "Test find methods:"
+p Property.find(57)
+p Property.find_address("0 Nexus of Reality")
+p Property.find_address("Atlantis")
 puts
 
 # binding.pry
